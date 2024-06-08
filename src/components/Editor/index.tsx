@@ -13,25 +13,27 @@ export type AccordionProps = ComponentPropsWithRef<'div'> & iAccordionProps;
 import clsx from 'clsx'
 import { Button } from '../ui/button';
 import Recursive from '../EditorComponents/recursive';
+import { useEditor } from '../../providers/editor-provider';
 
-type Props = { editorData: any; handleElementClick?: any; handleUnpreview: any}
+type Props = { handleElementClick?: any; handleUnpreview: any}
 
-export const Editor = ({ editorData, handleElementClick, handleUnpreview }: Props) => {
+export const Editor = ({ handleElementClick, handleUnpreview }: Props) => {
+  const { state } = useEditor()
   return (
     <div
       className={clsx(
         'use-automation-zoom-in h-full overflow-scroll mr-[385px] bg-background transition-all rounded-md',
         {
           '!p-0 !mr-0':
-            editorData.editor.previewMode === true || editorData.editor.liveMode === true,
-          '!w-[850px]': editorData.editor.device === 'Tablet',
-          '!w-[420px]': editorData.editor.device === 'Mobile',
-          'w-full': editorData.editor.device === 'Desktop',
+            state.editor.previewMode === true || state.editor.liveMode === true,
+          '!w-[850px]': state.editor.device === 'Tablet',
+          '!w-[420px]': state.editor.device === 'Mobile',
+          'w-full': state.editor.device === 'Desktop',
         }
       )}
       onClick={handleElementClick}
     >
-      {editorData.editor.previewMode && editorData.editor.liveMode && (
+      {state.editor.previewMode && state.editor.liveMode && (
         <Button
           variant={'ghost'}
           size={'icon'}
@@ -41,8 +43,8 @@ export const Editor = ({ editorData, handleElementClick, handleUnpreview }: Prop
           <FaEyeSlash />
         </Button>
       )}
-      {Array.isArray(editorData.editor.elements) &&
-        editorData.editor.elements.map((childElement: any) => (
+      {Array.isArray(state.editor.elements) &&
+        state.editor.elements.map((childElement: any) => (
           <Recursive
             key={childElement.id}
             element={childElement}

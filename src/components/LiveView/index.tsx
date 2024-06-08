@@ -5,7 +5,6 @@ import { Editor } from '../Editor';
 export const EditorLiveView = ({
   pageId,
   pageDetails,
-  editorData,
   handleElementClick,
   handleUnpreview,
 }: any) => {
@@ -21,7 +20,6 @@ export const EditorLiveView = ({
   return (
     <EditorProvider pageId={pageId} pageDetails={pageDetails}>
       <Editor
-        editorData={editorData}
         handleElementClick={handleElementClick}
         handleUnpreview={handleUnpreview}
       />
