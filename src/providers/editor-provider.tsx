@@ -17,20 +17,6 @@ export type EditorBtns =
   | null
   | '3Col'
 
-export type FunnelPage = {
-  id: String,
-  name: String,
-  pathName: String,
-  createdAt: Date,
-  updatedAt: Date,
-  visits: number,
-  content: String
-  order: number
-  previewImage: String,
-  funnelId: String,
-  Funnel: any,
-}
-
 export type EditorElement = {
   id: string
   styles: React.CSSProperties
@@ -379,7 +365,7 @@ export const EditorContext = createContext<{
   state: EditorState
   dispatch: Dispatch<EditorAction>
   pageId: string
-  pageDetails: FunnelPage | null
+  pageDetails: any
 }>({
   state: initialState,
   dispatch: () => undefined,
@@ -390,7 +376,7 @@ export const EditorContext = createContext<{
 type EditorProps = {
   children: React.ReactNode
   pageId: string
-  pageDetails: FunnelPage
+  pageDetails: any
 }
 
 export const EditorProvider = (props: EditorProps) => {
